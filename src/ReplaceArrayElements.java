@@ -12,7 +12,6 @@ public class ReplaceArrayElements {
     }
 
     public static int[] replaceElements(int[] source, int[] goal, int[] replace) {
-        boolean isReplace = false;
         int[] resultArray = new int[0];
 
         for (int i = 0; i < source.length; i++) {
@@ -29,10 +28,9 @@ public class ReplaceArrayElements {
                 }
 
                 if (counter == goal.length) {
-                    int[] firstPart = getSection(0, firstСoincidenceElementIndex-1, source);
-                    int[] secondPart = getSection((firstСoincidenceElementIndex + goal.length), source.length-1, source);
-                    resultArray = merge(firstPart, merge(replace, secondPart));
-                    isReplace = true;
+                    int[] firstPart = getSection(0, firstСoincidenceElementIndex - 1, source);
+                    int[] lastPart = getSection((firstСoincidenceElementIndex + goal.length), source.length - 1, source);
+                    resultArray = merge(firstPart, merge(replace, lastPart));
                 } else {
                     resultArray = source;
                 }
@@ -42,7 +40,7 @@ public class ReplaceArrayElements {
         return resultArray;
     }
 
-    public static void print (String message, int[] array) {
+    public static void print(String message, int[] array) {
         System.out.println(message);
         if (array != null) {
             printArray(array);
@@ -56,7 +54,7 @@ public class ReplaceArrayElements {
         System.out.println();
     }
 
-    public static void printResult (int[] sourceArray, int[] resultArray) {
+    public static void printResult(int[] sourceArray, int[] resultArray) {
         if (Arrays.equals(sourceArray, resultArray)) {
             print("Исходный массив не был изменен.", null);
         } else {
@@ -76,8 +74,8 @@ public class ReplaceArrayElements {
         return resultArray;
     }
 
-    public static int[] merge (int[] firstArray, int[] secondArray) {
-        int lengthArray = firstArray.length + secondArray.length;
+    public static int[] merge(int[] firstArray, int[] lastArray) {
+        int lengthArray = firstArray.length + lastArray.length;
         int[] resultArray = new int[lengthArray];
 
         for (int i = 0; i < firstArray.length; i++) {
@@ -85,13 +83,8 @@ public class ReplaceArrayElements {
         }
 
         for (int i = firstArray.length; i < resultArray.length; i++) {
-            resultArray[i] = secondArray[i-firstArray.length];
+            resultArray[i] = lastArray[i - firstArray.length];
         }
         return resultArray;
     }
-
-
-
-
-
 }
