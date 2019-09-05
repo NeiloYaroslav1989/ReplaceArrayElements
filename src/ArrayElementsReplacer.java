@@ -1,17 +1,17 @@
 import java.util.Arrays;
 
-public class ReplaceArrayElements {
+public class ArrayElementsReplacer {
     public static void main(String[] args) {
         int[] sourceArr = {1, 2, 2, 2, 3, 4, 5};
         int[] goalArr = {2, 3};
         int[] replaceArr = {0, 0, 0};
 
-        print("Исходный массив:", sourceArr);
-        int[] resultArr = replaceElements(sourceArr, goalArr, replaceArr);
-        printResult(sourceArr, resultArr);
+        ArrayElementsReplacer arrayElementsReplacer = new ArrayElementsReplacer();
+        int[] resultArr = arrayElementsReplacer.replaceElements(sourceArr, goalArr, replaceArr);
+        arrayElementsReplacer.printResult(sourceArr, resultArr);
     }
 
-    public static int[] replaceElements(int[] source, int[] goal, int[] replace) {
+    public int[] replaceElements(int[] source, int[] goal, int[] replace) {
         int[] resultArray = new int[0];
 
         for (int i = 0; i < source.length; i++) {
@@ -43,21 +43,22 @@ public class ReplaceArrayElements {
         return resultArray;
     }
 
-    public static void print(String message, int[] array) {
+    private void print(String message, int[] array) {
         System.out.println(message);
         if (array != null) {
             printArray(array);
         }
     }
 
-    public static void printArray(int[] array) {
+    private void printArray(int[] array) {
         for (int num : array) {
             System.out.print(num + " ");
         }
         System.out.println();
     }
 
-    public static void printResult(int[] sourceArray, int[] resultArray) {
+    public void printResult(int[] sourceArray, int[] resultArray) {
+        print("Исходный массив:", sourceArray);
         if (Arrays.equals(sourceArray, resultArray)) {
             print("Исходный массив не был изменен.", null);
         } else {
@@ -65,7 +66,7 @@ public class ReplaceArrayElements {
         }
     }
 
-    public static int[] getSection(int indexStart, int indexEnd, int[] array) {
+    private int[] getSection(int indexStart, int indexEnd, int[] array) {
         int lengthArray = indexEnd - indexStart + 1;
         int[] resultArray = new int[lengthArray];
         int indexResultArray = 0;
@@ -77,7 +78,7 @@ public class ReplaceArrayElements {
         return resultArray;
     }
 
-    public static int[] merge(int[] firstArray, int[] lastArray) {
+    private int[] merge(int[] firstArray, int[] lastArray) {
         int lengthArray = firstArray.length + lastArray.length;
         int[] resultArray = new int[lengthArray];
 
