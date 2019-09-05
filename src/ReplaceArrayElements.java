@@ -2,12 +2,12 @@ import java.util.Arrays;
 
 public class ReplaceArrayElements {
     public static void main(String[] args) {
-        int[] sourceArr = {1, 5, 3, 5, 7, 8, 9, 10};
-        int[] goalArr = {1, 5};
-        int[] replaceArr = {0, 0, 0, 0, 0, 0, 0};
-        int[] resultArr = replaceElements(sourceArr, goalArr, replaceArr);
+        int[] sourceArr = {1, 2, 2, 2, 3, 4, 5};
+        int[] goalArr = {2, 3};
+        int[] replaceArr = {0, 0, 0};
 
         print("Исходный массив:", sourceArr);
+        int[] resultArr = replaceElements(sourceArr, goalArr, replaceArr);
         printResult(sourceArr, resultArr);
     }
 
@@ -15,10 +15,10 @@ public class ReplaceArrayElements {
         int[] resultArray = new int[0];
 
         for (int i = 0; i < source.length; i++) {
-            int firstСoincidenceElementIndex = 0;
+            int coincidenceElementIndex = 0;
             int counter = 0;
             if (goal[0] == source[i]) {
-                firstСoincidenceElementIndex = i;
+                coincidenceElementIndex = i;
                 counter++;
                 for (int j = 1; j < goal.length; j++) {
                     if (goal[j] != source[++i]) {
@@ -28,14 +28,17 @@ public class ReplaceArrayElements {
                 }
 
                 if (counter == goal.length) {
-                    int[] firstPart = getSection(0, firstСoincidenceElementIndex - 1, source);
-                    int[] lastPart = getSection((firstСoincidenceElementIndex + goal.length), source.length - 1, source);
+                    int[] firstPart = getSection(0, coincidenceElementIndex - 1, source);
+                    int[] lastPart = getSection((coincidenceElementIndex + goal.length), source.length - 1, source);
                     resultArray = merge(firstPart, merge(replace, lastPart));
+                    source = resultArray;
+                    resultArray = source;
+                    i = (coincidenceElementIndex + replace.length - 1);
                 } else {
                     resultArray = source;
+                    i = coincidenceElementIndex;
                 }
             }
-
         }
         return resultArray;
     }
